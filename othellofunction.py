@@ -165,10 +165,10 @@ def twoplayer(x,y,colour,l,count):
 
 def cpu(f,x,y,count,l):
     '''Here f is a function which would be called depending on the difficulty of the cpu. The first half of the code is the calculation required for the player's move while the second half is for the CPU'''
-    restart(l)
     w = counter(l)
     if w[0]+w[1] == 64 or w[0]==0 or w[1]==0:
         return [False,w[0],w[1]]
+    restart(l)
     boolean = "O"
     cpu1 = "X"
     returnlist = [0]*5
@@ -182,7 +182,7 @@ def cpu(f,x,y,count,l):
         if (x,y) in dictionary.keys():
             change(l,boolean,dictionary,(x,y))
             restart(l)
-        else: restart(l);return False
+        else: return False
     else:
         dictionary = {}
         returnlist[3]+=1
@@ -271,14 +271,14 @@ def hard(d = {},l = []):#Does the same stuff as medium, but just one step ahead
         m = counter(l)
         if (i[0]==0 and i[1]!=0) or (i[0]==7 and i[1]!=7):
             if (i[1]+1<7 and l[i[0]][i[1]+1]=="O" and m[0]+m[1]<40) or (i[1]-1>0 and l[i[0]][i[1]-1]=="O" and m[0]+m[1]<40):
-                d1[i]+=4
+                d1[i]+=5
             d1[i]+=1
         if (i[1]==0 and i[0]!=0 and i!=(7,0)) or (i[1]==7 and i[0]!=7 and i!=(0,7)):
             if (i[0]+1<7 and l[i[1]][i[0]+1]=="O" and m[0]+m[1]<40) or (i[0]-1>0 and l[i[1]][i[0]-1]=="O" and m[0]+m[1]<40):
-                d1[i]+=4
+                d1[i]+=5
             d1[i]+=1
         elif i == (0,0) or i==(0,7) or i == (7,0) or i == (7,7):
-            d1[i] += 7
+            d1[i] += 20
         d1[i]+=len(d[i])
     
     k = l[:][:]
